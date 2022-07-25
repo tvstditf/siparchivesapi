@@ -19,7 +19,7 @@ sgMail.setApiKey(config.SEND_GRID_API_KEY);
 let refreshTokensArray = [];
 
 //Register
-router.post("/register", verifyTokenAndAdmin, async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     // Check if User Exists
     const userEmailExist = await User.findOne({ email: req.body.email });
