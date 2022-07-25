@@ -55,7 +55,7 @@ router.post("/register", async (req, res) => {
     });
     // Save User to DB
     const user = await newUser.save();
-    res.status(200).json("User Added Successfully");
+    res.status(200).json(user);
 
     // Send Email to User
     const msg = {
