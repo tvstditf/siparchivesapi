@@ -44,7 +44,7 @@ router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Get all Users
-router.get("/", verifyTokenAndDeskOfficer, async (req, res) => {
+router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
