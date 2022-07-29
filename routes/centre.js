@@ -68,7 +68,7 @@ router.post("/", async (req, res) => {
   try {
     // Check if Centre Exists
     const centreNameExist = await Centre.findOne({ name: req.body.name });
-    const centreEmailExist = await Centre.findOne({ email: req.body.email });
+    // const centreEmailExist = await Centre.findOne({ email: req.body.email });
     const centreAccountNumberExist = await Centre.findOne({
       accountNumber: req.body.accountNumber,
     });
@@ -84,12 +84,12 @@ router.post("/", async (req, res) => {
       });
     }
 
-    if (centreEmailExist) {
-      return res.status(400).json({
-        error: true,
-        message: `Centre with Email: ${req.body.email} already exists`,
-      });
-    }
+    // if (centreEmailExist) {
+    //   return res.status(400).json({
+    //     error: true,
+    //     message: `Centre with Email: ${req.body.email} already exists`,
+    //   });
+    // }
 
     if (centreAccountNumberExist) {
       return res.status(400).json({
