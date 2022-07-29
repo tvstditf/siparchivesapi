@@ -69,13 +69,13 @@ router.post("/", async (req, res) => {
     // Check if Centre Exists
     const centreNameExist = await Centre.findOne({ name: req.body.name });
     // const centreEmailExist = await Centre.findOne({ email: req.body.email });
-    const centreAccountNumberExist = await Centre.findOne({
-      accountNumber: req.body.accountNumber,
-    });
-    const centreBVNExist = await Centre.findOne({ bvn: req.body.bvn });
-    const centrePhoneNumberExist = await Centre.findOne({
-      phoneNumber: req.body.phoneNumber,
-    });
+    // const centreAccountNumberExist = await Centre.findOne({
+    //   accountNumber: req.body.accountNumber,
+    // });
+    // const centreBVNExist = await Centre.findOne({ bvn: req.body.bvn });
+    // const centrePhoneNumberExist = await Centre.findOne({
+    //   phoneNumber: req.body.phoneNumber,
+    // });
 
     if (centreNameExist) {
       return res.status(400).json({
@@ -91,26 +91,26 @@ router.post("/", async (req, res) => {
     //   });
     // }
 
-    if (centreAccountNumberExist) {
-      return res.status(400).json({
-        error: true,
-        message: `Centre with Account Number: ${req.body.accountNumber} already exists`,
-      });
-    }
+    // if (centreAccountNumberExist) {
+    //   return res.status(400).json({
+    //     error: true,
+    //     message: `Centre with Account Number: ${req.body.accountNumber} already exists`,
+    //   });
+    // }
 
-    if (centreBVNExist) {
-      return res.status(400).json({
-        error: true,
-        message: `Centre with BVN: ${req.body.bvn} already exists`,
-      });
-    }
+    // if (centreBVNExist) {
+    //   return res.status(400).json({
+    //     error: true,
+    //     message: `Centre with BVN: ${req.body.bvn} already exists`,
+    //   });
+    // }
 
-    if (centrePhoneNumberExist) {
-      return res.status(400).json({
-        error: true,
-        message: `Centre with Phone Number: ${req.body.phoneNumber} already exists`,
-      });
-    }
+    // if (centrePhoneNumberExist) {
+    //   return res.status(400).json({
+    //     error: true,
+    //     message: `Centre with Phone Number: ${req.body.phoneNumber} already exists`,
+    //   });
+    // }
 
     const newCentre = new Centre({
       name: req.body.name,
