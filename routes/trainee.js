@@ -62,42 +62,42 @@ router.get("/", verifyTokenAndAO, async (req, res) => {
 router.post("/", verifyTokenAndAO, async (req, res) => {
   try {
     //Check if trainee exists
-    const TraineeEmailExist = await Trainee.findOne({ email: req.body.email });
-    const TraineeAccountNumberExist = await Trainee.findOne({
-      accountNumber: req.body.accountNumber,
-    });
-    const TraineeBVNExist = await Trainee.findOne({ bvn: req.body.bvn });
-    const TraineePhoneNumberExist = await Trainee.findOne({
-      phoneNumber: req.body.phoneNumber,
-    });
+    // const TraineeEmailExist = await Trainee.findOne({ email: req.body.email });
+    // const TraineeAccountNumberExist = await Trainee.findOne({
+    //   accountNumber: req.body.accountNumber,
+    // });
+    // const TraineeBVNExist = await Trainee.findOne({ bvn: req.body.bvn });
+    // const TraineePhoneNumberExist = await Trainee.findOne({
+    //   phoneNumber: req.body.phoneNumber,
+    // });
 
-    if (TraineeEmailExist) {
-      return res.status(400).json({
-        error: true,
-        message: `Trainee with Email: ${req.body.email} already exists`,
-      });
-    }
+    // if (TraineeEmailExist) {
+    //   return res.status(400).json({
+    //     error: true,
+    //     message: `Trainee with Email: ${req.body.email} already exists`,
+    //   });
+    // }
 
-    if (TraineeAccountNumberExist) {
-      return res.status(400).json({
-        error: true,
-        message: `Trainee with Account Number: ${req.body.accountNumber} already exists`,
-      });
-    }
+    // if (TraineeAccountNumberExist) {
+    //   return res.status(400).json({
+    //     error: true,
+    //     message: `Trainee with Account Number: ${req.body.accountNumber} already exists`,
+    //   });
+    // }
 
-    if (TraineeBVNExist) {
-      return res.status(400).json({
-        error: true,
-        message: `Trainee with BVN: ${req.body.bvn} already exists`,
-      });
-    }
+    // if (TraineeBVNExist) {
+    //   return res.status(400).json({
+    //     error: true,
+    //     message: `Trainee with BVN: ${req.body.bvn} already exists`,
+    //   });
+    // }
 
-    if (TraineePhoneNumberExist) {
-      return res.status(400).json({
-        error: true,
-        message: `Trainee with Phone Number: ${req.body.phoneNumber} already exists`,
-      });
-    }
+    // if (TraineePhoneNumberExist) {
+    //   return res.status(400).json({
+    //     error: true,
+    //     message: `Trainee with Phone Number: ${req.body.phoneNumber} already exists`,
+    //   });
+    // }
 
     const newTrainee = new Trainee({
       name: req.body.name,
