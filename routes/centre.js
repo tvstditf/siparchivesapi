@@ -65,12 +65,12 @@ router.get("/", verifyToken, async (req, res) => {
     ...req.query,
   });
 
-  if (centres.length === 0) {
+  if (centres.length !== 0) {
+    return res.status(200).json(centres);
+  } else {
     return res
       .status(400)
       .json({ message: "Centre cannot be found or does not exist" });
-  } else {
-    return res.status(200).json(centres);
   }
 });
 
