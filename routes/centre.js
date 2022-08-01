@@ -46,20 +46,31 @@ router.get("/find/:id", verifyToken, async (req, res) => {
 
 //Get all Centres
 router.get("/", verifyToken, async (req, res) => {
-  try {
-    const centres = await Centre.find({
-      ...req.query,
-    });
+  // try {
+  //   const centres = await Centre.find({
+  //     ...req.query,
+  //   });
 
-    if (centres.length === 0) {
-      return res
-        .status(400)
-        .json({ message: "Centre cannot be found or does not exist" });
-    } else {
-      return res.status(200).json(centres);
-    }
-  } catch (error) {
-    return res.status(500).json(error);
+  //   if (centres.length === 0) {
+  //     return res
+  //       .status(400)
+  //       .json({ message: "Centre cannot be found or does not exist" });
+  //   } else {
+  //     return res.status(200).json(centres);
+  //   }
+  // } catch (error) {
+  //   return res.status(500).json(error);
+  // }
+  const centres = await Centre.find({
+    ...req.query,
+  });
+
+  if (centres.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "Centre cannot be found or does not exist" });
+  } else {
+    return res.status(200).json(centres);
   }
 });
 
