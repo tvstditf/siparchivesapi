@@ -45,7 +45,7 @@ router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //Get all Centres
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
   // try {
   //   const centres = await Centre.find({
   //     ...req.query,
