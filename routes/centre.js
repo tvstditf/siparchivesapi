@@ -35,7 +35,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Get Centre
-router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.get("/find/:id", verifyTokenAndAO, async (req, res) => {
   try {
     const centre = await Centre.findById(req.params.id);
     res.status(200).json(centre);
@@ -75,7 +75,7 @@ router.get("/", async (req, res) => {
 });
 
 //Create a centre
-router.post("/", verifyTokenAndAuthorization, async (req, res) => {
+router.post("/", verifyTokenAndAO, async (req, res) => {
   try {
     // Check if Centre Exists
     const centreNameExist = await Centre.findOne({ name: req.body.name });
