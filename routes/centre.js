@@ -75,7 +75,7 @@ router.get("/", async (req, res) => {
 });
 
 //Create a centre
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
+router.post("/", verifyTokenAndAuthorization, async (req, res) => {
   try {
     // Check if Centre Exists
     const centreNameExist = await Centre.findOne({ name: req.body.name });
