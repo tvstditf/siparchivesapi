@@ -45,7 +45,7 @@ router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //Get all Centres
-router.get("/", verifyTokenAndAuthorization, async (req, res) => {
+router.get("/", verifyTokenAndAdmin, async (req, res) => {
   // try {
   //   const centres = await Centre.find({
   //     ...req.query,
@@ -75,7 +75,7 @@ router.get("/", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //Create a centre
-router.post("/", verifyTokenAndAuthorization, async (req, res) => {
+router.post("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     // Check if Centre Exists
     const centreNameExist = await Centre.findOne({ name: req.body.name });
