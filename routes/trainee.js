@@ -41,7 +41,7 @@ router.get("/find/:id", verifyToken, async (req, res) => {
 });
 
 //Get all Trainees
-router.get("/", verifyTokenAndAO, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const trainees = await Trainee.find({
       ...req.query,
