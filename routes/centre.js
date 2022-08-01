@@ -1,11 +1,9 @@
 const router = require("express").Router();
 const Centre = require("../models/Centre");
 const {
-  verifyTokenAndAuthorization,
   verifyTokenAndDeskOfficer,
   verifyTokenAndAdmin,
   verifyTokenAndAO,
-  verifyToken,
 } = require("../utils/verifyToken");
 
 //Update Centre
