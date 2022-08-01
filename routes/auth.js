@@ -16,7 +16,7 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(config.SEND_GRID_API_KEY);
 
 //RefreshTokens Array
-let refreshTokensArray = [];
+// let refreshTokensArray = [];
 
 //Register
 router.post("/register", async (req, res) => {
@@ -107,95 +107,81 @@ router.post("/login", async (req, res) => {
       config.JWT_SECRET_KEY
     );
 
-    // Refreshtoken
-    const refreshToken = jwt.sign(
-      {
-        id: user._id,
-        isAdmin: user.isAdmin,
-        isMgt: user.isMgt,
-        isAO: user.isAO,
-        isDeskOfficer: user.isDeskOfficer,
-      },
-      config.JWT_RFR_SECRET_KEY
-    );
-
-    refreshTokensArray.push(refreshToken);
-
     const { password, ...others } = user._doc; // Check if the Phone number goes to the Front-End
-    return res.status(200).json({ ...others, accessToken, refreshToken });
+    return res.status(200).json({ ...others, accessToken });
   } catch (error) {
     return res.status(500).json(error);
   }
 });
 
 //Generate Refresh Token
-router.post("/refreshtoken", async (req, res) => {
-  try {
-    const refreshAccessToken = req.body.refreshToken;
-    // const user = await User.findOne({ username: req.body.username });
+// router.post("/refreshtoken", async (req, res) => {
+//   try {
+//     const refreshAccessToken = req.body.refreshToken;
+//     // const user = await User.findOne({ username: req.body.username });
 
-    if (!refreshAccessToken) {
-      return res.status(401).json("You are not Authenticated");
-    }
+//     if (!refreshAccessToken) {
+//       return res.status(401).json("You are not Authenticated");
+//     }
 
-    if (!refreshTokensArray.includes(refreshAccessToken)) {
-      return res.status(403).json("Refresh Token is not Valid");
-    }
+//     if (!refreshTokensArray.includes(refreshAccessToken)) {
+//       return res.status(403).json("Refresh Token is not Valid");
+//     }
 
-    await jwt.verify(
-      refreshAccessToken,
-      config.JWT_RFR_SECRET_KEY,
-      (error, user) => {
-        error && console.log(error);
+//     await jwt.verify(
+//       refreshAccessToken,
+//       config.JWT_RFR_SECRET_KEY,
+//       (error, user) => {
+//         error && console.log(error);
 
-        refreshTokensArray = refreshTokensArray.filter(
-          (token) => token !== refreshAccessToken
-        );
+//         refreshTokensArray = refreshTokensArray.filter(
+//           (token) => token !== refreshAccessToken
+//         );
 
-        //Accesstoken
-        const newAccessToken = jwt.sign(
-          {
-            id: user._id,
-            isAdmin: user.isAdmin,
-            isMgt: user.isMgt,
-            isAO: user.isAO,
-            isDeskOfficer: user.isDeskOfficer,
-          },
-          config.JWT_SECRET_KEY
-        );
+//         //Accesstoken
+//         const newAccessToken = jwt.sign(
+//           {
+//             id: user._id,
+//             isAdmin: user.isAdmin,
+//             isMgt: user.isMgt,
+//             isAO: user.isAO,
+//             isDeskOfficer: user.isDeskOfficer,
+//           },
+//           config.JWT_SECRET_KEY
+//         );
 
-        // Refreshtoken
-        const newRefreshToken = jwt.sign(
-          {
-            id: user._id,
-            isAdmin: user.isAdmin,
-            isMgt: user.isMgt,
-            isAO: user.isAO,
-            isDeskOfficer: user.isDeskOfficer,
-          },
-          config.JWT_RFR_SECRET_KEY
-        );
+//         // Refreshtoken
+//         const newRefreshToken = jwt.sign(
+//           {
+//             id: user._id,
+//             isAdmin: user.isAdmin,
+//             isMgt: user.isMgt,
+//             isAO: user.isAO,
+//             isDeskOfficer: user.isDeskOfficer,
+//           },
+//           config.JWT_RFR_SECRET_KEY
+//         );
 
-        refreshTokensArray.push(newRefreshToken);
+//         refreshTokensArray.push(newRefreshToken);
 
-        res.status(200).json({
-          accessToken: newAccessToken,
-          refreshAccessToken: newRefreshToken,
-        });
-      }
-    );
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
+//         res.status(200).json({
+//           accessToken: newAccessToken,
+//           refreshAccessToken: newRefreshToken,
+//         });
+//       }
+//     );
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// });
 
 //Logout
-router.post("/logout", (req, res) => {
-  const refreshAccessToken = req.body.refreshToken;
-  refreshTokensArray = refreshTokensArray.filter(
-    (token) => token !== refreshAccessToken
-  );
-  res.status(200).json("You logged out successfully");
-});
+// router.post("/logout", (req, res) => {
+//   const refreshAccessToken = req.body.refreshToken;
+//   refreshTokensArray = refreshTokensArray.filter(
+//     (token) => token !== refreshAccessToken
+//   );
+//   res.status(200).json("You logged out successfully");
+// });
 
 module.exports = router;
