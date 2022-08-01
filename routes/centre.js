@@ -35,7 +35,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Get Centre
-router.get("/find/:id", verifyToken, async (req, res) => {
+router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     const centre = await Centre.findById(req.params.id);
     res.status(200).json(centre);
@@ -45,7 +45,7 @@ router.get("/find/:id", verifyToken, async (req, res) => {
 });
 
 //Get all Centres
-router.get("/", verifyToken, async (req, res) => {
+router.get("/", verifyTokenAndAuthorization, async (req, res) => {
   // try {
   //   const centres = await Centre.find({
   //     ...req.query,
