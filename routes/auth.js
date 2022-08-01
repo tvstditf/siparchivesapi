@@ -161,10 +161,7 @@ router.post("/refreshtoken", async (req, res) => {
             isAO: user.isAO,
             isDeskOfficer: user.isDeskOfficer,
           },
-          config.JWT_SECRET_KEY,
-          {
-            expiresIn: "60m",
-          }
+          config.JWT_SECRET_KEY
         );
 
         // Refreshtoken
@@ -176,10 +173,7 @@ router.post("/refreshtoken", async (req, res) => {
             isAO: user.isAO,
             isDeskOfficer: user.isDeskOfficer,
           },
-          config.JWT_RFR_SECRET_KEY,
-          {
-            expiresIn: "60m",
-          }
+          config.JWT_RFR_SECRET_KEY
         );
 
         refreshTokensArray.push(newRefreshToken);
