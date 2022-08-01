@@ -8,12 +8,14 @@ const verifyToken = (req, res, next) => {
     const token = authHeader.split(" ")[1];
     jwt.verify(token, config.JWT_SECRET_KEY, (err, user) => {
       if (err) {
+        console.log("Token is Invalid");
         return res.status(403).json("Token is InValid!!!!");
       }
       req.user = user;
       next();
     });
   } else {
+    console.log("You are not authenticated");
     return res.status(401).json("You are not Authenticated to view this Page");
   }
 };
