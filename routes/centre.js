@@ -9,7 +9,7 @@ const {
 } = require("../utils/verifyToken");
 
 //Update Centre
-router.put("/:id", verifyTokenAndDeskOfficer, async (req, res) => {
+router.put("/:id", verifyTokenAndAO, async (req, res) => {
   try {
     const centre = await Centre.findByIdAndUpdate(
       req.params.id,
@@ -25,7 +25,7 @@ router.put("/:id", verifyTokenAndDeskOfficer, async (req, res) => {
 });
 
 //Delete Centre
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id", verifyTokenAndAO, async (req, res) => {
   try {
     await Centre.findByIdAndDelete(req.params.id);
     res.status(200).json("Centre Information has been deleted");
@@ -45,7 +45,7 @@ router.get("/find/:id", verifyTokenAndAO, async (req, res) => {
 });
 
 //Get all Centres
-router.get("/", async (req, res) => {
+router.get("/", verifyTokenAndAO, async (req, res) => {
   // try {
   //   const centres = await Centre.find({
   //     ...req.query,
