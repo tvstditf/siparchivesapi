@@ -1,11 +1,9 @@
 const router = require("express").Router();
 const Trainee = require("../models/Trainee");
 const {
-  verifyTokenAndAuthorization,
   verifyTokenAndDeskOfficer,
   verifyTokenAndAdmin,
   verifyTokenAndAO,
-  verifyToken,
 } = require("../utils/verifyToken");
 
 //Update Trainee
@@ -31,7 +29,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Get Trainee
-router.get("/find/:id", verifyToken, async (req, res) => {
+router.get("/find/:id", verifyTokenAndAO, async (req, res) => {
   try {
     const trainee = await Trainee.findById(req.params.id);
     res.status(200).json(trainee);
